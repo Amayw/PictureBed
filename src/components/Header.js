@@ -1,9 +1,11 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
+import logo from '../logo.svg'
 
 function Header() {
     return (
-        <>
+        <div>
+            <img src={logo} />
             <nav>
                 <ul>
                     <li>
@@ -17,7 +19,7 @@ function Header() {
                     </li>
                 </ul>
             </nav>
-        </>
+        </div>
     );
 }
 
