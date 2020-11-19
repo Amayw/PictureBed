@@ -15,27 +15,27 @@ const About=lazy(()=>import('./views/About'))
 
 function App() {
   return (
-    <div className="App">
-        <div>
+        <>
           <Header/>
 
-          <Suspense fallback={Loading}>
-            <Switch>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/history">
-                <History />
-              </Route>
-              <Route path="/" exact>
-                <Home />
-              </Route>
-            </Switch>
-          </Suspense>
+          <main>
+            <Suspense fallback={<Loading/>}>
+              <Switch>
+                <Route path="/about">
+                  <About />
+                </Route>
+                <Route path="/history">
+                  <History />
+                </Route>
+                <Route path="/" exact>
+                  <Home />
+                </Route>
+              </Switch>
+            </Suspense>
+          </main>
 
           <Footer/>
-        </div>
-    </div>
+        </>
   );
 }
 
