@@ -32,7 +32,7 @@ const Header = styled.header`
 function Component() {
     return (
         <Header>
-                <img src={logo}/>
+                {/*<img src={logo}/>*/}
                 <nav>
                     <ul>
                         <li>

@@ -1,49 +1,99 @@
-import {action, observable} from 'mobx';
+// import {action, observable} from 'mobx';
+//
+// class AuthStore{
+//     @observable isLogin=false;
+//     @observable isLoading=false;
+//     @observable values={
+//         username:'name',
+//         password:''
+//     };
+//
+//     @action setIsLogin=(isLogin)=>{
+//         this.isLogin=isLogin;
+//     }
+//
+//     @action setUsername=(username)=>{
+//         this.values.username=username;
+//     }
+//
+//     @action setPassword=(password)=>{
+//         this.values.password=password;
+//     }
+//
+//     @action login=()=>{
+//         console.log('登陆中......');
+//         this.isLoading=true;
+//         setTimeout(()=>{
+//             console.log('登陆成功');
+//             this.isLogin=true;
+//             this.isLoading=false;
+//         },1000);
+//     }
+//
+//     @action register=()=>{
+//         console.log('注册中...');
+//         this.isLoading=true;
+//         setTimeout(()=>{
+//             console.log('注册成功');
+//             this.isLogin=true;
+//             this.isLoading=false;
+//         },1000);
+//     }
+//
+//     @action logout=()=>{
+//         console.log('已注销');
+//     }
+//
+// }
+//
+// export {AuthStore};
+import { observable, action } from 'mobx';
 
-class AuthStore{
-    @observable isLogin=false;
-    @observable isLoading=false;
-    @observable values={
-        username:'',
-        password:''
+class AuthStore {
+    @observable isLogin  = false;
+    @observable isLoading = false;
+    @observable values = {
+        username: 'jirengu',
+        password: ''
     };
 
-    @action setIsLogin=(isLogin)=>{
-        this.isLogin=isLogin;
+    @action setIsLogin(isLogin) {
+        this.isLogin = isLogin;
     }
 
-    @action setUserName=(username)=>{
-        this.values.username=username;
+    @action setUsername(username) {
+        this.values.username = username;
     }
 
-    @action setPassword=(password)=>{
-        this.values.password=password;
+    @action setPassword(password) {
+        this.values.password = password;
     }
 
-    @action login=()=>{
-        console.log('登陆中......');
-        this.isLoading=true;
-        setTimeout(()=>{
-            console.log('登陆成功');
-            this.isLogin=true;
-            this.isLoading=false;
-        },1000);
+    @action login() {
+        console.log('登录中...')
+        this.isLoading = true;
+        setTimeout(() => {
+            console.log('登录成功')
+            this.isLogin = true;
+            this.isLoading = false;
+        }, 1000);
     }
 
-    @action register=()=>{
-        console.log('注册中...');
-        this.isLoading=true;
-        setTimeout(()=>{
-            console.log('注册成功');
-            this.isLogin=true;
-            this.isLoading=false;
-        },1000);
+    @action register() {
+        console.log('注册中...')
+        this.isLoading = true;
+        setTimeout(() => {
+            console.log('注册成功')
+            this.isLogin = true;
+            this.isLoading = false;
+        }, 1000);
     }
 
-    @action logout=()=>{
+    @action logout() {
         console.log('已注销');
     }
 
 }
 
-export {AuthStore};
+
+export { AuthStore } ;
