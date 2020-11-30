@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {Button, Form, Input} from 'antd';
 import {useStores} from '../stores'
+import {useHistory} from 'react-router-dom'
 
 const FormWrapper = styled.div`
     width: 40vw;
@@ -22,9 +23,11 @@ const Register = () => {
     const onFinish = values => {
         AuthStore.setUsername(values.username);
         AuthStore.setPassword(values.password);
+        const history=new useHistory();
         AuthStore.register()
             .then(()=>{
             console.log('注册成功，跳转至登录页面');
+            history.push('/');
         })
             .catch(()=>{
                 console.log('注册失败');

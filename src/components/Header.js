@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {NavLink} from 'react-router-dom';
+import React from 'react';
+import {NavLink,useHistory} from 'react-router-dom';
 import logo from '../logo.svg';
 import styled from 'styled-components';
 import {useStores} from '../stores';
@@ -49,16 +49,17 @@ const Header = styled.header`
 
 const Component = observer(() => {
     const {AuthStore,UserStore} = useStores();
+    const history=new useHistory();
     const handleLogout=()=>{
         AuthStore.logout();
     }
 
     const handleLogin=()=>{
-
+        history.push('/login')
     }
 
     const handleRegister=()=>{
-
+        history.push('/register')
     }
     return (
         <Header>
@@ -83,11 +84,9 @@ const Component = observer(() => {
                         <Button className="rightButton" onClick={handleLogout}>注销</Button>
                     </>
                     : <>
-                        <Button  onClick={handleLogin}>
-                            <NavLink to="/login">login</NavLink>
+                        <Button  onClick={handleLogin}>Login
                         </Button>
-                        <Button onClick={handleRegister} className="rightButton">
-                            <NavLink to="/register">register</NavLink>
+                        <Button onClick={handleRegister} className="rightButton">Register
                         </Button>
                     </>}
             </div>
