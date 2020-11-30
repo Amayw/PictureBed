@@ -3,21 +3,20 @@ import styled from 'styled-components';
 import {Button, Form, Input} from 'antd';
 
 const FormWrapper = styled.div`
-    padding-top:50px ;
-    >h1{
-      text-align: center;
-    }
+    width: 40vw;
+    margin: 100px auto;
+    
 `;
 
 const layout = {
-    labelCol: {span: 8},
-    wrapperCol: {span: 8},
+    labelCol: {span: 4},
+    // wrapperCol: {span: 8},
 };
 const tailLayout = {
-    wrapperCol: {offset: 11, span: 2},
+    wrapperCol: {offset: 12},
 };
 
-const Login = () => {
+const Register = () => {
     const onFinish = values => {
         console.log('Success:', values);
     };
@@ -32,9 +31,9 @@ const Login = () => {
         return Promise.resolve();
     }
 
+
     return (
         <FormWrapper>
-            <h1>登录</h1>
             <Form
                 {...layout}
                 name="basic"
@@ -42,11 +41,11 @@ const Login = () => {
                 onFinishFailed={onFinishFailed}
             >
                 <Form.Item
-                    label="Username"
+                    label="用户名"
                     name="username"
                     rules={[{
                         required: true,
-                        message: 'Please input your username!'
+                        message: '请输入用户名!'
                     },
                         {
                             validator:validateUserName
@@ -57,15 +56,15 @@ const Login = () => {
                 </Form.Item>
 
                 <Form.Item
-                    label="Password"
+                    label="密码"
                     name="password"
                     rules={[{
                         required: true,
-                        message: 'Please input your password!'
+                        message: '请输入密码！'
                     },
                         {
                             min: 6,
-                            message: 'password must be at least 6 characters'
+                            message: '长度不少于6个字符'
                         }]}
                 >
                     <Input.Password/>
@@ -73,7 +72,7 @@ const Login = () => {
 
                 <Form.Item {...tailLayout}>
                     <Button type="primary" htmlType="submit">
-                        Submit
+                        登录
                     </Button>
                 </Form.Item>
             </Form>
@@ -81,4 +80,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;

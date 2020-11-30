@@ -98,5 +98,4 @@ const Register = () => {
         </FormWrapper>
     );
 };
-
-export default Register;
+export default Register
