@@ -24,7 +24,7 @@ const Register = () => {
         AuthStore.setPassword(values.password);
         AuthStore.register()
             .then(()=>{
-            console.log('注册成功');
+            console.log('注册成功，跳转至登录页面');
         })
             .catch(()=>{
                 console.log('注册失败');
