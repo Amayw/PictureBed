@@ -44,12 +44,22 @@ const Header = styled.header`
             margin-left: 20px;
           }
         }
-    }
-`;
+
+`
 
 const Component = observer(() => {
-    const {AuthStore} = useStores();
-    const [loginVisible] = useState(AuthStore.isLogin);
+    const {AuthStore,UserStore} = useStores();
+    const handleLogout=()=>{
+        AuthStore.logout();
+    }
+
+    const handleLogin=()=>{
+
+    }
+
+    const handleRegister=()=>{
+
+    }
     return (
         <Header>
             <nav>
@@ -67,16 +77,16 @@ const Component = observer(() => {
                 </ul>
             </nav>
             <div className="userRelated">
-                {loginVisible ?
+                {UserStore.currentUser ?
                     <>
-                        {AuthStore.values.username}
-                        <Button className="rightButton">注销</Button>
+                        {UserStore.currentUser.attributes.username}
+                        <Button className="rightButton" onClick={handleLogout}>注销</Button>
                     </>
                     : <>
-                        <Button>
+                        <Button  onClick={handleLogin}>
                             <NavLink to="/login">login</NavLink>
                         </Button>
-                        <Button className="rightButton">
+                        <Button onClick={handleRegister} className="rightButton">
                             <NavLink to="/register">register</NavLink>
                         </Button>
                     </>}
