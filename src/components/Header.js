@@ -52,6 +52,7 @@ const Component = observer(() => {
     const history=new useHistory();
     const handleLogout=()=>{
         AuthStore.logout();
+        history.push('/login')
     }
 
     const handleLogin=()=>{

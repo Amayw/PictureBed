@@ -13,7 +13,6 @@ function Home() {
     return (
         <HomeWrapper>
             {UserStore.currentUser?<Uploader/>:<PleaseLogin/>}
-
         </HomeWrapper>
     );
 }
