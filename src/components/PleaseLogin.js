@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../assets/1.jpg'
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 
@@ -31,7 +30,7 @@ const PleaseLogin=()=>{
             </span>
                 <span>再上传文件哦</span>
             </div>
-            <img src={logo} />
+            <img src='/1.jpg' />
 
         </UploaderWrapper>
     )
