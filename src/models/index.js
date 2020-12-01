@@ -48,4 +48,4 @@ const Upload = {
     }
 };
 
-export {Auth};
+export {Auth,Upload};

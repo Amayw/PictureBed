@@ -17,7 +17,7 @@ li{
 #root{
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
 
 }
 
@@ -25,4 +25,5 @@ main{
     flex:1;
     background-color: #edf0f8;
     padding: 10px 100px;
+    overflow: auto;
 }

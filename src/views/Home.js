@@ -1,13 +1,20 @@
 import React from 'react';
 import {useStores} from '../stores'
+import Uploader from '../components/Uploader';
+import PleaseLogin from '../components/PleaseLogin';
+import styled from 'styled-components';
 
+const HomeWrapper=styled.div`
+
+  
+`
 function Home() {
     const {UserStore} =useStores();
     return (
-        <>
-            <h1>Home</h1>
-            {UserStore.currentUser?UserStore.currentUser.attributes.username:'请登录'}
-        </>
+        <HomeWrapper>
+            {UserStore.currentUser?<Uploader/>:<PleaseLogin/>}
+
+        </HomeWrapper>
     );
 }
 
