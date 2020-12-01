@@ -20,10 +20,10 @@ const tailLayout = {
 
 const Register = () => {
     const {AuthStore}=useStores();
+    const history=new useHistory();
     const onFinish = values => {
         AuthStore.setUsername(values.username);
         AuthStore.setPassword(values.password);
-        const history=new useHistory();
         AuthStore.register()
             .then(()=>{
             console.log('注册成功，跳转至登录页面');
