@@ -1,5 +1,5 @@
 import {observable, action, makeObservable} from 'mobx';
-import {Upload} from '../model'
+import {Upload} from '../models'
 
 class ImageStore{
     constructor() {
@@ -16,10 +16,10 @@ class ImageStore{
     }
 
     @action setFileName=(filename)=>{
-        this.file=filename;
+        this.filename=filename;
     }
 
-    @action addImage=(file,filename)=>{
+    @action addImage=()=>{
         this.isUploading=true;
         return new Promise((resolve,reject)=>{
             Upload.addImage(this.file,this.filename)
@@ -29,6 +29,7 @@ class ImageStore{
                 })
                 .catch(err=>{
                     console.log('上传失败');
+                    console.log(err);
                     reject(err);
                 })
                 .finally(()=>{

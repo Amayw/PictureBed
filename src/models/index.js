@@ -32,7 +32,7 @@ const Auth = {
 const Upload = {
     addImage(file, filename) {
         const imageItem = new AV.Object('Image');
-        const avFile = new AV.File(file, filename);
+        const avFile = new AV.File(filename, file);
         imageItem.set('owner', AV.User.current());
         imageItem.set('url', avFile);
         imageItem.set('filename', filename);
