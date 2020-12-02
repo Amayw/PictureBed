@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import styled from 'styled-components';
 import {useStores} from '../stores';
 import {observer,useLocalStore} from 'mobx-react';
-import {Upload} from 'antd';
+import {Upload,message,Spin} from 'antd';
 import {InboxOutlined} from '@ant-design/icons';
 import pic from '../assets/7.jpg';
 
@@ -20,7 +20,7 @@ const UploaderWrapper = styled.div`
             >img{
               width: 400px;
                }
-               >span{
+            >span{
                   position: absolute; 
                   top: 70%;
                   left: 50%;
@@ -30,7 +30,7 @@ const UploaderWrapper = styled.div`
                   }
                   >.ant-upload.ant-upload-drag p.ant-upload-text{
                     position: absolute;
-                    top: -420%;
+                    top: -386%;
                     color:#394460;
                     margin: 0;
                     padding: 0;
@@ -96,7 +96,7 @@ const UploaderWrapper = styled.div`
 const Uploader = observer(() => {
     const widthRef = useRef();
     const heightRef = useRef();
-    const {ImageStore} = useStores();
+    const {ImageStore,UserStore} = useStores();
     const store = useLocalStore(() => ({
         width: null,
         setWidth(value) {
@@ -130,6 +130,20 @@ const Uploader = observer(() => {
         beforeUpload: file => {
             ImageStore.setFile(file);
             ImageStore.setFileName(file.name);
+            if(UserStore.currentUser===null){
+                message.warning('请先登录再上传！')
+                return false;
+            }
+            if(!(/(svg$)|(jpg$)|(png$)|(jpeg$)|(gif$)/ig.test(file.type))){
+                message.error('只能上传svg/jpg/jpeg/png/gif格式的图片！');
+                return false;
+            }
+
+            if(file.size>1024*1024){
+                message.error('图片最大1M！');
+                return false;
+            }
+
             ImageStore.addImage().then((serverFile) => {
                     console.log('上传成功');
                 }, (err) => {
@@ -143,13 +157,15 @@ const Uploader = observer(() => {
     return (
         <UploaderWrapper>
             <div className="uploadLeft">
+                <Spin tip="上传中" spinning={ImageStore.isUploading}>
                 <img src={pic} alt="哆啦A梦"/>
-                <Dragger {...props}>
-                    <p className="ant-upload-drag-icon">
-                        <InboxOutlined/>
-                    </p>
-                    <p className="ant-upload-text"><strong>点击</strong>或<strong>拖拽文件</strong>到我<strong>嘴巴</strong>里</p>
-                </Dragger>
+                </Spin>
+                    <Dragger {...props}>
+                        <p className="ant-upload-drag-icon">
+                            <InboxOutlined/>
+                        </p>
+                        <p className="ant-upload-text"><strong>点击</strong>或<strong>拖拽文件</strong>到我<strong>嘴巴</strong>里</p>
+                    </Dragger>
             </div>
             {ImageStore.serverFile ? (
                 <div className="resultDisplay">
