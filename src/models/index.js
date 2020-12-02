@@ -45,7 +45,22 @@ const Upload = {
                     reject(err);
                 });
         });
+    },
+    queryImage({page=0,limit=10}){
+        const query = new AV.Query('Image');
+        query.include('owner');
+        query.equalTo('owner', AV.User.current());
+        query.limit(limit);
+        query.skip(page*limit);
+        query.descending('createAt');
+        return new Promise((resolve,reject)=>{
+            query.find().then((images) => {
+                resolve(images);
+            }).catch(err=>{
+                reject(err);
+            });
+        })
     }
-};
 
+};
 export {Auth,Upload};
