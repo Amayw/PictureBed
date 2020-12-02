@@ -1,6 +1,6 @@
 import {observable, action, makeObservable} from 'mobx';
 import {Upload} from '../models'
-
+import {message} from 'antd';
 class ImageStore{
     constructor() {
         makeObservable(this)
@@ -21,6 +21,7 @@ class ImageStore{
 
     @action addImage=()=>{
         this.isUploading=true;
+        this.serverFile=null;
         return new Promise((resolve,reject)=>{
             Upload.addImage(this.file,this.filename)
                 .then((serverFile)=>{
@@ -28,8 +29,6 @@ class ImageStore{
                     resolve(serverFile);
                 })
                 .catch(err=>{
-                    console.log('上传失败');
-                    console.log(err);
                     reject(err);
                 })
                 .finally(()=>{

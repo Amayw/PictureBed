@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {Button, Form, Input} from 'antd';
 import {useStores} from '../stores';
 import {useHistory} from 'react-router-dom'
+import {message} from 'antd';
 
 const FormWrapper = styled.div`
     width: 40vw;
@@ -26,11 +27,11 @@ const Register = () => {
         AuthStore.setPassword(values.password);
         AuthStore.login()
             .then(()=>{
-                console.log('登录成功，跳转至首页');
+                message.info('登录成功！');
                 history.push('/');
             })
-            .catch(()=>{
-                console.log('登录失败');
+            .catch(err=>{
+                message.error('登录失败，请检查用户名或密码！');
             })
     };
 

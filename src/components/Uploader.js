@@ -128,6 +128,7 @@ const Uploader = observer(() => {
     const props = {
         showUploadList: false,
         beforeUpload: file => {
+            ImageStore.serverFile=null;
             ImageStore.setFile(file);
             ImageStore.setFileName(file.name);
             if(UserStore.currentUser===null){
@@ -145,9 +146,9 @@ const Uploader = observer(() => {
             }
 
             ImageStore.addImage().then((serverFile) => {
-                    console.log('上传成功');
+                message.info('上传成功！');
                 }, (err) => {
-                    console.log('上传失败');
+                message.error('上传失败！');
                 }
             );
             return false;
@@ -167,7 +168,7 @@ const Uploader = observer(() => {
                         <p className="ant-upload-text"><strong>点击</strong>或<strong>拖拽文件</strong>到我<strong>嘴巴</strong>里</p>
                     </Dragger>
             </div>
-            {ImageStore.serverFile ? (
+            {ImageStore.serverFile?(
                 <div className="resultDisplay">
                     <h1>上传结果</h1>
                     <div className="item">
