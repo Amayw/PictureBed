@@ -1,11 +1,10 @@
 import React from 'react';
 import {NavLink,useHistory} from 'react-router-dom';
-import logo from '../logo.svg';
 import styled from 'styled-components';
 import {useStores} from '../stores';
 import {observer} from 'mobx-react';
 import { Button } from 'antd';
-
+import logo from '../assets/logo.jpg'
 
 const Header = styled.header`
     position: relative;
@@ -65,7 +64,7 @@ const Component = observer(() => {
     return (
         <Header>
             <nav>
-                <img src={logo} alt="logo"/>
+                <img src={logo} alt="logo"/>蓝胖子图床
                 <ul>
                     <li>
                         <NavLink activeClassName='active' to="/" exact>Home</NavLink>

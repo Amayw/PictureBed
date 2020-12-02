@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import styled from 'styled-components';
 import {useStores} from '../stores';
-import {observer} from 'mobx-react';
-import {Upload,Input} from 'antd';
+import {observer,useLocalStore} from 'mobx-react';
+import {Upload} from 'antd';
 import {InboxOutlined} from '@ant-design/icons';
+import pic from '../assets/7.jpg';
 
 const {Dragger} = Upload;
 
@@ -50,6 +51,7 @@ const UploaderWrapper = styled.div`
                }
        }
        >.resultDisplay{
+            border-radius: 8px;
             border: 1px dashed #ccc;
             padding: 30px 60px;
             display: flex;
@@ -69,26 +71,69 @@ const UploaderWrapper = styled.div`
                >img{
                max-width: 600px;
                padding-top: 10px;
-            }
+               }
+               >div{
+                 &.inputGroup{
+                   display: flex;
+                   flex-direction: column;
+                       >input{
+                        border:1px solid #ccc;
+                        border-radius: 2px;
+                        color: #666;
+                           &.inputTop{
+                           margin-bottom: 4px;
+                           }
+                       }
+                 }
+               }
+               
+               
             }
           }
 `;
 
 
 const Uploader = observer(() => {
+    const widthRef = useRef();
+    const heightRef = useRef();
     const {ImageStore} = useStores();
+    const store = useLocalStore(() => ({
+        width: null,
+        setWidth(value) {
+            store.width = value;
+        },
+        get widthStr() {
+            return store.width ? `/w/${store.width}` : '';
+        },
+        height: null,
+        setHeight(value) {
+            store.height = value;
+        },
+        get heightStr() {
+            return store.height ? `/h/${store.height}` : '';
+        },
+        get fullStr() {
+            return ImageStore.serverFile.attributes.url.attributes.url + '?imageView2/0' + store.widthStr + store.heightStr;
+        }
+
+    }));
+
+    const changeWidth = () => {
+        store.setWidth(widthRef.current.value);
+    };
+    const changeHeight = () => {
+        store.setHeight(heightRef.current.value);
+    };
+
     const props = {
-        showUploadList:false,
+        showUploadList: false,
         beforeUpload: file => {
-            console.log('here');
             ImageStore.setFile(file);
             ImageStore.setFileName(file.name);
             ImageStore.addImage().then((serverFile) => {
                     console.log('上传成功');
-                    console.log(serverFile);
                 }, (err) => {
                     console.log('上传失败');
-                    console.log(err);
                 }
             );
             return false;
@@ -98,7 +143,7 @@ const Uploader = observer(() => {
     return (
         <UploaderWrapper>
             <div className="uploadLeft">
-                <img src='/7.jpg'/>
+                <img src={pic} alt="哆啦A梦"/>
                 <Dragger {...props}>
                     <p className="ant-upload-drag-icon">
                         <InboxOutlined/>
@@ -109,29 +154,37 @@ const Uploader = observer(() => {
             {ImageStore.serverFile ? (
                 <div className="resultDisplay">
                     <h1>上传结果</h1>
-                        <div class="item">
-                            <span>线上地址</span>
-                            <div><a target="_blank" href={ImageStore.serverFile.attributes.url.attributes.url}>
-                                {ImageStore.serverFile.attributes.url.attributes.url}
-                            </a></div>
+                    <div className="item">
+                        <span>线上地址</span>
+                        <div><a target="_blank" rel="noreferrer"
+                                href={ImageStore.serverFile.attributes.url.attributes.url}>
+                            {ImageStore.serverFile.attributes.url.attributes.url}
+                        </a></div>
+                    </div>
+                    <div className="item">
+                        <span>文件名称</span>
+                        <span>{ImageStore.filename}</span>
+                    </div>
+                    <div className="item">
+                        <span>图片预览</span>
+                        <img  alt="上传图片展示" src={ImageStore.serverFile.attributes.url.attributes.url}/>
+                    </div>
+                    <div className="item">
+                        <span>更多尺寸</span>
+                        <div className="inputGroup">
+                            <input ref={widthRef} onChange={changeWidth} className='inputTop' placeholder="最大宽度 (可选)"/>
+                            <input ref={heightRef} onChange={changeHeight} placeholder="最大高度 (可选)"/>
                         </div>
-                        <div class="item">
-                            <span>文件名称</span>
-                            <span>{ImageStore.filename}</span>
+                    </div>
+                    <div className="item">
+                        <span>重置地址</span>
+                        <div>
+                            <a target='_blank' rel="noreferrer" href={store.fullStr}>{store.fullStr}</a>
                         </div>
-                        <div class="item">
-                            <span>图片预览</span>
-                                <img src={ImageStore.serverFile.attributes.url.attributes.url} />
-                        </div>
-                        <div class="item">
-                            <span>更多尺寸</span>
-                            <div>
-                                <Input placeholder="最大宽度(可选)" />
-                                <Input placeholder="最大高度(可选)" />
-                            </div>
-                        </div>
+                    </div>
+
                 </div>
-            ):null}
+            ) : null}
         </UploaderWrapper>
     );
 });
