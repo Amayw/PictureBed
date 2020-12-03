@@ -28,6 +28,12 @@ main{
     padding: 10px 100px;
     overflow: auto;
 }
+@media (max-width: 600px){
+    main{
+        border: 1px solid red;
+        padding: 20px;
+    }
+}
 
 ::-webkit-scrollbar {
     width: 0px;  /* Remove scrollbar space */

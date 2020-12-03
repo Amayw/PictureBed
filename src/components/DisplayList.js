@@ -11,10 +11,11 @@ const DisplayItem=styled.div`
       justify-content: space-between;
       width: 70vw;
       margin: 0 auto;
-      border: 1px solid #ccc;
+      border: 1px dashed #ccc;
+      padding: 10px;
+      border-radius: 4px;
       >div{
          &.spanName{
-           //width: 30vw;
            padding: 0 10px;
          }
          >img{
@@ -32,14 +33,14 @@ const DisplayItem=styled.div`
              height:100px;
              object-fit: contain;
              }
-      }
+        }
       }
       
       
         @media (max-width: 1000px){
             width: 96vw;
             flex-direction: column;
-            margin: 0 -40px;
+            justify-content:center;
         >div{
             text-align: center;
              >img{
@@ -48,7 +49,6 @@ const DisplayItem=styled.div`
              object-fit: contain;
              }
         }
-      }
       }
 
 `
