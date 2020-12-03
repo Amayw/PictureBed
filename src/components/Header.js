@@ -4,17 +4,17 @@ import styled from 'styled-components';
 import {useStores} from '../stores';
 import {observer} from 'mobx-react';
 import { Button } from 'antd';
-import logo from '../assets/logo.jpg'
+import logo from '../assets/smile.png'
 
 const Header = styled.header`
     position: relative;
     display:flex;
     align-items: center;
     justify-content: space-between;
-    background: #394460;
+    background: #677097;
     color: #f1f4fc;
     padding: 10px 100px;
-            vertical-align: center;
+    vertical-align: center;
     >nav{
         display: flex;
         align-items: center;
@@ -22,6 +22,10 @@ const Header = styled.header`
         >img{
         width: 30px;
         height:30px;
+        margin-right: 20px;
+        }
+        >span{
+        font-weight: bold;
         }
         >ul{
             display: flex;
@@ -31,7 +35,8 @@ const Header = styled.header`
                 >a{
                    color:#f1f4fc;
                    &.active{
-                      color:#fda601;
+                   font-weight: bold;
+                      color:#84c2f1;
                    }
                 }
 
@@ -39,10 +44,39 @@ const Header = styled.header`
         }
     }
     >.userRelated{
+          display: flex;
+          align-items: center;
           >.rightButton{
             margin-left: 20px;
           }
         }
+    @media (max-width: 800px){
+      padding: 20px 6px;
+      >nav{
+        >span{
+          display: none;
+        }
+        >img{
+           margin-right: 1px;
+        }
+        >ul{
+          >li{
+            margin-left: 0;
+            >a{
+              padding: 0 4px;
+            }
+          }
+        }
+      }
+      >.userRelated{
+        >button{
+          padding: 0 6px;
+          &.rightButton{
+            margin-left: 4px;
+          }
+        }
+      }
+    }
 
 `
 
@@ -64,16 +98,17 @@ const Component = observer(() => {
     return (
         <Header>
             <nav>
-                <img src={logo} alt="logo"/>蓝胖子图床
+                <img src={logo} alt="logo"/>
+                <span>Doraemon Picture Bed</span>
                 <ul>
                     <li>
-                        <NavLink activeClassName='active' to="/" exact>Home</NavLink>
+                        <NavLink activeClassName='active' to="/" exact>首页</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName='active' to="/history">History</NavLink>
+                        <NavLink activeClassName='active' to="/history">上传历史</NavLink>
                     </li>
                     <li>
-                        <NavLink activeClassName='active' to="/about">About me</NavLink>
+                        <NavLink activeClassName='active' to="/about">关于我</NavLink>
                     </li>
                 </ul>
             </nav>
@@ -84,9 +119,9 @@ const Component = observer(() => {
                         <Button className="rightButton" onClick={handleLogout}>注销</Button>
                     </>
                     : <>
-                        <Button  onClick={handleLogin}>Login
+                        <Button  onClick={handleLogin}>登录
                         </Button>
-                        <Button onClick={handleRegister} className="rightButton">Register
+                        <Button onClick={handleRegister} className="rightButton">注册
                         </Button>
                     </>}
             </div>

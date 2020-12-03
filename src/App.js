@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Loading from './components/Loading';
 import {
     Switch,
-    Route,
+    Route ,
 } from 'react-router-dom';
 import {Suspense, lazy} from 'react';
 
