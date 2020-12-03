@@ -1,13 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Uploader from '../components/Uploader';
 import {useStores} from '../stores';
 import PleaseLogin from '../components/PleaseLogin'
 
 function Home() {
-    const {AuthStore}=useStores();
+    const {AuthStore,UserStore}=useStores();
+    useEffect(()=>{
+        UserStore.pullUser();
+    },[])
     return (
         <>
-        {AuthStore.isLogin?<Uploader/>:<PleaseLogin/>}
+        {UserStore.currentUser?<Uploader/>:<PleaseLogin/>}
         </>
     );
 }
