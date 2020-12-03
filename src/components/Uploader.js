@@ -9,7 +9,6 @@ import pic from '../assets/7.jpg';
 const {Dragger} = Upload;
 
 const UploaderWrapper = styled.div`
-       //width: 80vw;
        display: flex;
        flex-direction: column;
        align-items: center;
@@ -71,7 +70,11 @@ const UploaderWrapper = styled.div`
                >img{
                max-width: 600px;
                padding-top: 10px;
+               @media (max-width: 700px){
+                 max-width: 300px;
                }
+               }
+               
                >div{
                  &.inputGroup{
                    display: flex;
