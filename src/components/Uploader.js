@@ -9,7 +9,7 @@ import pic from '../assets/7.jpg';
 const {Dragger} = Upload;
 
 const UploaderWrapper = styled.div`
-       width: 80vw;
+       //width: 80vw;
        display: flex;
        flex-direction: column;
        align-items: center;

@@ -58,11 +58,11 @@ class AuthStore{
     }
 
     @action logout=()=>{
-        Auth.logout();
         UserStore.resetUser();
+        HistoryStore.resetList();
         this.isLogin=false;
         ImageStore.resetImage();
-        HistoryStore.resetList();
+        Auth.logout();
     }
 
     @action getCurrentUser=()=>{

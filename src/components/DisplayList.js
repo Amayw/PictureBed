@@ -11,13 +11,46 @@ const DisplayItem=styled.div`
       justify-content: space-between;
       width: 70vw;
       margin: 0 auto;
+      border: 1px solid #ccc;
       >div{
+         &.spanName{
+           //width: 30vw;
+           padding: 0 10px;
+         }
          >img{
          width: 120px;
          height:140px;
          object-fit: contain;
          }
       }
+      
+        @media (max-width: 1300px){
+        width: 96vw;
+        >div{
+             >img{
+             width: 80px;
+             height:100px;
+             object-fit: contain;
+             }
+      }
+      }
+      
+      
+        @media (max-width: 1000px){
+            width: 96vw;
+            flex-direction: column;
+            margin: 0 -40px;
+        >div{
+            text-align: center;
+             >img{
+             width: 60px;
+             height:60px;
+             object-fit: contain;
+             }
+        }
+      }
+      }
+
 `
 
 const DisplayList=observer(()=>{
@@ -50,10 +83,10 @@ const DisplayList=observer(()=>{
                                 <div>
                                     <img src={item.attributes.url.attributes.url} />
                                 </div>
-                                <div>
+                                <div className="spanName">
                                     {item.attributes.filename}
                                 </div>
-                                <div>
+                                <div className="spanName">
                                     <a target="_blank" rel="noreferrer" href={item.attributes.url.attributes.url}>{item.attributes.url.attributes.url}</a>
                                 </div>
 
