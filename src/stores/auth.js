@@ -6,6 +6,7 @@ class AuthStore{
         makeObservable(this)
     }
 
+    @observable isLogin=false;
     @observable values={
         username:'',
         password:''
@@ -24,10 +25,12 @@ class AuthStore{
             Auth.login(this.values.username,this.values.password)
                 .then(user=>{
                     UserStore.pullUser();
+                    this.isLogin=true;
                     resolve(user);
                 })
                 .catch(err=>{
                     UserStore.resetUser();
+                    this.isLogin=false;
                     reject(err);
                 })
         })
@@ -40,10 +43,12 @@ class AuthStore{
             Auth.register(this.values.username,this.values.password)
                 .then(user=>{
                     UserStore.pullUser();
+                    this.isLogin=true;
                     resolve(user);
                 })
                 .catch(err=>{
                     UserStore.resetUser();
+                    this.isLogin=false;
                     reject(err);
                 })
         })
@@ -52,6 +57,7 @@ class AuthStore{
     @action logout=()=>{
         Auth.logout();
         UserStore.resetUser();
+        this.isLogin=false;
     }
 
     @action getCurrentUser=()=>{

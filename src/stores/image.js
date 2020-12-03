@@ -1,6 +1,6 @@
 import {observable, action, makeObservable} from 'mobx';
 import {Upload} from '../models'
-import {message} from 'antd';
+
 class ImageStore{
     constructor() {
         makeObservable(this)

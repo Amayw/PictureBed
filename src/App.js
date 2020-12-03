@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Loading from './components/Loading';
 import {
     Switch,
-    Route
+    Route,
 } from 'react-router-dom';
 import {Suspense, lazy} from 'react';
 
@@ -14,11 +14,10 @@ const About = lazy(() => import('./views/About'));
 const Login = lazy(() => import('./views/Login'));
 const Register = lazy(() => import('./views/Register'));
 
-function App() {
+const App=()=>{
     return (
         <>
             <Header/>
-
             <main>
                 <Suspense fallback={<Loading/>}>
                     <Switch>

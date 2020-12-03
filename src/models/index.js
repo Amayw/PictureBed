@@ -63,4 +63,5 @@ const Upload = {
     }
 
 };
+
 export {Auth,Upload};

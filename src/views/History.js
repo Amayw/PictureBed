@@ -1,10 +1,14 @@
 import React from 'react';
+import DisplayList from '../components/DisplayList';
+import {useStores} from '../stores'
 
-function History() {
+const History=()=>{
+    const {AuthStore} =useStores();
     return (
         <>
-            <h1>History</h1>
-        </>
+       {/*{AuthStore.isLogin?<List/>:'没登录'}*/}
+       <DisplayList/>
+       </>
     );
 }
 

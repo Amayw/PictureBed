@@ -1,19 +1,14 @@
 import React from 'react';
-import {useStores} from '../stores'
 import Uploader from '../components/Uploader';
-import PleaseLogin from '../components/PleaseLogin';
-import styled from 'styled-components';
+import {useStores} from '../stores';
+import PleaseLogin from '../components/PleaseLogin'
 
-const HomeWrapper=styled.div`
-
-  
-`
 function Home() {
-    const {UserStore} =useStores();
+    const {AuthStore}=useStores();
     return (
-        <HomeWrapper>
-            {UserStore.currentUser?<Uploader/>:<PleaseLogin/>}
-        </HomeWrapper>
+        <>
+        {AuthStore.isLogin?<Uploader/>:<PleaseLogin/>}
+        </>
     );
 }
 

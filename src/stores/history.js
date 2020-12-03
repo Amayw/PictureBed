@@ -8,19 +8,18 @@ class HistoryStore{
     }
 
     @observable page=0;
-    @observable List=[];
+    @observable list=[];
     @observable isLoading=false;
     @observable hasMore=true;
     limit=10;
 
     @action appendImage=(newList)=>{
-        this.List=this.List.concat(newList);
+        this.list=this.list.concat(newList);
     }
     @action queryImage=()=>{
         this.isLoading=true;
-        return new Promise((resolve,reject)=>{
-            Upload.queryImage({page:this.page,limit:this.limit});
-        }).then(newList=>{
+        Upload.queryImage({page:this.page,limit:this.limit})
+        .then(newList=>{
             this.page++;
             this.appendImage(newList);
             if(newList.length<this.limit){
@@ -34,5 +33,4 @@ class HistoryStore{
     }
 
 }
-
 export default new HistoryStore();

@@ -20,16 +20,10 @@ const PleaseLogin=()=>{
     return (
         <UploaderWrapper>
             <div>
-                <span>
                 哆啦A梦友情提醒您，
-            </span>
-                <span>
                 请先<NavLink to="/login">登录</NavLink>
             或者
-            <NavLink to="/register">注册</NavLink>
-            ，
-            </span>
-                <span>再上传文件哦</span>
+            <NavLink to="/register">注册</NavLink>哦
             </div>
             <img src={pic} />
 
