@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {observer} from 'mobx-react';
 import {useStores} from '../stores';
 import { List, Spin } from 'antd';
@@ -9,10 +9,13 @@ const DisplayItem=styled.div`
       display: flex;
       align-items: center;
       justify-content: space-between;
-      width: 100vw;
+      width: 70vw;
+      margin: 0 auto;
       >div{
          >img{
-         max-width: 300px;
+         width: 120px;
+         height:140px;
+         object-fit: contain;
          }
       }
 `
@@ -22,6 +25,14 @@ const DisplayList=observer(()=>{
     const loadMore=()=>{
         HistoryStore.queryImage();
     }
+
+
+    useEffect(()=>{
+        return ()=>{
+            HistoryStore.resetList();
+        }
+    },[HistoryStore])
+
     return (
         <div>
             <InfiniteScroll
@@ -45,6 +56,7 @@ const DisplayList=observer(()=>{
                                 <div>
                                     <a target="_blank" rel="noreferrer" href={item.attributes.url.attributes.url}>{item.attributes.url.attributes.url}</a>
                                 </div>
+
                             </DisplayItem>
                         </List.Item>
                     )}

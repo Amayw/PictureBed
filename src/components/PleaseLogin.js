@@ -25,7 +25,7 @@ const PleaseLogin=()=>{
             或者
             <NavLink to="/register">注册</NavLink>哦
             </div>
-            <img src={pic} />
+            <img alt="哆啦A梦" src={pic} />
 
         </UploaderWrapper>
     )

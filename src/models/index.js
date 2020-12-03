@@ -52,7 +52,7 @@ const Upload = {
         query.equalTo('owner', AV.User.current());
         query.limit(limit);
         query.skip(page*limit);
-        query.descending('createAt');
+        // query.descending('createAt');
         return new Promise((resolve,reject)=>{
             query.find().then((images) => {
                 resolve(images);
@@ -61,7 +61,6 @@ const Upload = {
             });
         })
     }
-
 };
 
 export {Auth,Upload};

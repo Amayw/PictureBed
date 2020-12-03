@@ -37,6 +37,13 @@ class ImageStore{
         })
     };
 
+    @action resetImage=()=>{
+        this.file=null;
+        this.serverFile=null;
+        this.filename="";
+        this.isUploading=false;
+    }
+
 }
 
 export default new ImageStore();

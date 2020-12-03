@@ -1,6 +1,9 @@
 import {action, observable,makeObservable} from 'mobx';
 import {Auth} from '../models'
 import UserStore from './user'
+import ImageStore from './image'
+import HistoryStore from './history'
+
 class AuthStore{
     constructor() {
         makeObservable(this)
@@ -58,6 +61,8 @@ class AuthStore{
         Auth.logout();
         UserStore.resetUser();
         this.isLogin=false;
+        ImageStore.resetImage();
+        HistoryStore.resetList();
     }
 
     @action getCurrentUser=()=>{

@@ -32,5 +32,12 @@ class HistoryStore{
         })
     }
 
+    @action resetList=()=>{
+        this.page=0;
+        this.list=[];
+        this.isLoading=false;
+        this.hasMore=true;
+    }
+
 }
 export default new HistoryStore();

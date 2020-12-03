@@ -6,7 +6,6 @@ const History=()=>{
     const {AuthStore} =useStores();
     return (
         <>
-       {/*{AuthStore.isLogin?<List/>:'没登录'}*/}
        <DisplayList/>
        </>
     );
